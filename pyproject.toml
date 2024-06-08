@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "ditainer"
+version = "0.4.5"
+description = ""
+authors = ["Damian Ontivero <damian.ontivero@icloud.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pyyaml = "^6.0.1"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.3.0"
+faker = "^24.2.0"
+flake8 = "^7.0.0"
+ipdb = "^0.13.13"
+pytest = "^8.1.1"
+isort = "^5.13.2"
+twine = "^5.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+
+[tool.black]
+line-length = 120
+skip-magic-trailing-comma = true
