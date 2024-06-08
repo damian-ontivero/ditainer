@@ -1,7 +1,5 @@
 import yaml
 
-from ditainer.container import Container
-
 from .loader import Loader
 
 yaml.add_constructor("!ref", lambda loader, node: "!ref " + loader.construct_scalar(node))
@@ -9,9 +7,6 @@ yaml.add_constructor("!tagged", lambda loader, node: "!tagged " + loader.constru
 
 
 class YAMLLoader(Loader):
-    def __init__(self, container: Container):
-        super().__init__(container)
-
     def load(self, file_path: str) -> None:
         self._file_path = file_path
         try:

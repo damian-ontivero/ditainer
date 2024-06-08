@@ -11,7 +11,6 @@ class Loader(metaclass=abc.ABCMeta):
     A Loader is responsible for loading a file and parsing its content to register services in a container.
     """
 
-    @abc.abstractmethod
     def __init__(self, container: Container) -> None:
         if not isinstance(container, Container):
             raise LoaderError("container must be an instance of Container")
