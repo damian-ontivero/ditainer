@@ -3,15 +3,14 @@
 This is a basic Dependency Inection Container for Python.
 
 ## How to use it
-At the moment `ditainer` only understands `yaml` files and a dependency is trated as `service`.
+At the moment, `ditainer` can only load dependencies from yaml files.
 
-A `service` is a `class` that may have a `factory` method.
+Dependencies are treated as services.
+These services are classes that can receive arguments to be initialized or not.
+It is also possible to initialize these services through their factory methods, which can also accept arguments.
+Additionally, these services can be tagged with a tag.
 
-There is also the possibility to add `tags` to each `service`.
-
-A `service` can receive a list of `arguments`.
-
-`arguments` can be `simple`, `reference` to another `service` or a list with all the other `services` with an specific `tag`.
+Arguments can be simple, a reference to another service, or a list of all services with a specific tag.
 
 An example of yaml file could be:
 
@@ -52,10 +51,10 @@ services:
 
 ```
 
-Every `service` has to have `id`, `module` and `class`.
-If the `service` does not have either `id`, `module` and `class` there will be an error.
+Each service must have id, module and class.
+If the service has no id, module or class, there will be an error.
 
-`ditainer` can also understand an *import file* with different files to load:
+`ditainer` can also understand an import file with different files to load:
 
 ```yaml
 imports:
@@ -66,7 +65,7 @@ imports:
 ```
 
 ### Start using ditainer
-Once the `yaml` files are ready:
+Once the yaml files are ready:
 
 ```python
 import os
