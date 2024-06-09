@@ -5,58 +5,55 @@ This is a basic Dependency Inection Container for Python.
 ## How to use it
 At the moment `ditainer` only understands `yaml` files and a dependency is trated as `service`.
 
-It is possible to declare a `service` as a `class`, `method` or `variable`.
+A `service` is a `class` that may have a `factory` method.
 
 There is also the possibility to add `tags` to each `service`.
 
-A `class` or a `method` can receive a list of `arguments`.
+A `service` can receive a list of `arguments`.
 
-`arguments` can be `normal`, `reference` to another `service` or a list with all the other `services` with an specific `tag`.
+`arguments` can be `simple`, `reference` to another `service` or a list with all the other `services` with an specific `tag`.
 
 An example of yaml file could be:
 
 ```yaml
 services:
-  DBSession:
+  - id: DBSession
     module: my_module.db
-    variable: mysql_session
+    class: DBSession
+    factory: create_session
 
-  UserRepository:
+  - id: UserRepository
     module: my_module.user.repository
-    class:
-      name: MySqlUserRepository
-      arguments:
-        - !ref DBSession
+    class: MySqlUserRepository
+    arguments:
+      - !ref DBSession
 
-  QueryBus:
+  - id: QueryBus
     module: my_module.query_bus
-    class:
-      name: InMemoryQueryBus
-      arguments:
-        - !tagged query_handler
+    class: InMemoryQueryBus
+    arguments:
+      - !tagged query_handler
 
-  UserFindByIDQueryHandler:
+  - id: UserFindByIDQueryHandler
     module: my_module.user.find_by_id_query_handler
-    class:
-      name: UserFindByIDQueryHandler
-      arguments:
-        - !ref UserRepository
-      tags:
-        - query_handler
+    class: UserFindByIDQueryHandler
+    arguments:
+      - !ref UserRepository
+    tags:
+      - query_handler
 
-  UserFindByCodeQueryHandler:
+  - id: UserFindByCodeQueryHandler
     module: my_module.user.find_by_code_query_handler
-    class:
-      name: UserFindByCodeQueryHandler
-      arguments:
-        - !ref UserRepository
-      tags:
-        - query_handler
+    class: UserFindByCodeQueryHandler
+    arguments:
+      - !ref UserRepository
+    tags:
+      - query_handler
 
 ```
 
-Every `service` has to have a `service_id` and a `module`.
-If the `service` does not have either `class`, `method` or `variable` there will be an error.
+Every `service` has to have `id`, `module` and `class`.
+If the `service` does not have either `id`, `module` and `class` there will be an error.
 
 `ditainer` can also understand an *import file* with different files to load:
 
@@ -64,6 +61,7 @@ If the `service` does not have either `class`, `method` or `variable` there will
 imports:
   - { resource: "./services_1.yaml" }
   - { resource: "./services_2.yaml" }
+  - { resource: "./services_3.yaml" }
 
 ```
 
