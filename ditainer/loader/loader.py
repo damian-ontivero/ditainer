@@ -36,12 +36,12 @@ class Loader(metaclass=abc.ABCMeta):
             self.load(os.path.join(os.path.dirname(self._file_path), import_["resource"]))
             self._file_path = working_dir
 
-    def _process_services(self, services: dict) -> None:
+    def _process_services(self, services: list[dict]) -> None:
         """
         Process the services defined in the file and register them in the container.
         """
-        for service_id, service in services.items():
-            self._container.register_service(service_id, service)
+        for service in services:
+            self._container.register_service(service)
 
 
 class LoaderError(Exception):

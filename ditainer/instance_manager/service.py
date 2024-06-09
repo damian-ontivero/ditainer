@@ -1,9 +1,9 @@
+from .service_arguments import ServiceArguments
 from .service_class import ServiceClass
+from .service_factory import ServiceFactory
 from .service_id import ServiceId
-from .service_method import ServiceMethod
 from .service_module import ServiceModule
-from .service_tag import ServiceTag
-from .service_variable import ServiceVariable
+from .service_tags import ServiceTags
 
 
 class Service:
@@ -11,22 +11,22 @@ class Service:
         self,
         id: ServiceId,
         module: ServiceModule,
-        class_: ServiceClass | None,
-        method: ServiceMethod | None,
-        variable: ServiceVariable | None,
-        tags: list[ServiceTag],
+        class_: ServiceClass,
+        factory: ServiceFactory | None,
+        arguments: ServiceArguments | None,
+        tags: ServiceTags | None,
     ):
         if id is None:
             raise ServiceError("Id must be provided")
         if module is None:
             raise ServiceError("Module must be provided")
-        if class_ is None and method is None and variable is None:
-            raise ServiceError("Class_, method, or variable must be provided")
+        if class_ is None:
+            raise ServiceError("Class must be provided")
         self._id = id
         self._module = module
         self._class = class_
-        self._method = method
-        self._variable = variable
+        self._factory = factory
+        self._arguments = arguments
         self._tags = tags
 
     @property
@@ -42,46 +42,53 @@ class Service:
         return self._class
 
     @property
-    def method(self) -> ServiceMethod | None:
-        return self._method
+    def factory(self) -> ServiceFactory | None:
+        return self._factory
 
     @property
-    def variable(self) -> ServiceVariable | None:
-        return self._variable
+    def arguments(self) -> ServiceArguments | None:
+        return self._arguments
 
     @property
-    def tags(self) -> list[ServiceTag]:
+    def tags(self) -> ServiceTags:
         return self._tags
 
     @classmethod
     def from_primitives(
-        cls, id: str, module: str, class_: dict | None, method: dict | None, variable: str | None, tags: list[str]
+        cls, id: str, module: str, class_: str, factory: str | None, arguments: list | None, tags: list | None
     ) -> "Service":
         return cls(
-            ServiceId(id),
-            ServiceModule(module),
-            ServiceClass.from_primitives(class_) if class_ is not None else None,
-            ServiceMethod.from_primitives(method) if method is not None else None,
-            ServiceVariable(variable) if variable is not None else None,
-            [ServiceTag(tag) for tag in tags],
+            ServiceId.from_string(id),
+            ServiceModule.from_string(module),
+            ServiceClass.from_string(class_),
+            ServiceFactory.from_string(factory) if factory else None,
+            ServiceArguments.from_list(arguments) if arguments else None,
+            ServiceTags.from_list(tags) if tags else None,
         )
 
-    def __str__(self) -> str:
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, self.__class__):
+            return NotImplemented
         return (
-            "{c}(id={id!r}, module={module!r}, class_={class_!r}, "
-            "method={method!r}, variable={variable!r}, tags={tags!r})"
-        ).format(
-            c=self.__class__.__name__,
-            id=self._id,
-            module=self._module,
-            class_=self._class,
-            method=self._method,
-            variable=self._variable,
-            tags=self._tags,
+            self._id == other._id
+            and self._module == other._module
+            and self._class == other._class
+            and self._factory == other._factory
+            and self._arguments == other._arguments
+            and self._tags == other._tags
         )
+
+    def __ne__(self, other: object) -> bool:
+        return not self.__eq__(other)
+
+    def __hash__(self) -> int:
+        return hash((self._id, self._module, self._class, self._factory, self._arguments, self._tags))
 
     def __repr__(self) -> str:
-        return self.__str__()
+        return (
+            f"{self.__class__.__name__}(id={self._id}, module={self._module}, class={self._class}, "
+            f"factory={self._factory}, arguments={self._arguments}, tags={self._tags})"
+        )
 
 
 class ServiceError(Exception):

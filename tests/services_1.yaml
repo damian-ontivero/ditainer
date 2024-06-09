@@ -1,60 +1,14 @@
 services:
-  service__class_no_arguments__no_method:
-    module: tests.utils
-    class:
-      name: ClassWithNoArguments
+  - id: ClassWithNoArguments
+    module: tests.dependencies_1
+    class: ClassWithNoArguments
 
-  service__class_arguments__no_method:
-    module: tests.utils
-    class:
-      name: ClassWithArguments
-      arguments:
-        - "Lionel Messi"
+  - id: ClassWithEmptyArguments
+    module: tests.dependencies_1
+    class: ClassWithNoArguments
+    arguments: []
 
-  service__no_class__method_no_arguments:
-    module: tests.utils
-    method:
-      name: method_with_no_arguments
-
-  service__no_class__method_arguments:
-    module: tests.utils
-    method:
-      name: create_session
-      arguments:
-        - "sqlite:///:memory:"
-
-  service__class_no_arguments__method_no_arguments:
-    module: tests.utils
-    class:
-      name: ClassWithNoArguments
-    method:
-      name: method_with_no_arguments
-
-  service__class_arguments__method_no_arguments:
-    module: tests.utils
-    class:
-      name: ClassWithArguments
-      arguments:
-        - "Angel Di Maria"
-    method:
-      name: method_with_no_arguments
-
-  service__class_no_arguments__method_arguments:
-    module: tests.utils
-    class:
-      name: ClassWithNoArguments
-    method:
-      name: method_with_arguments
-      arguments:
-        - "Enzo Fernandez"
-
-  service__class_arguments__method_arguments:
-    module: tests.utils
-    class:
-      name: ClassWithArguments
-      arguments:
-        - "Rodrigo De Paul"
-    method:
-      name: method_with_arguments
-      arguments:
-        - "Lautaro Martinez"
+  - id: ClassWithArguments
+    module: tests.dependencies_1
+    class: ClassWithArguments
+    arguments: ["Lionel Messi"]

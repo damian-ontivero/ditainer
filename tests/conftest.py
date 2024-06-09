@@ -11,5 +11,4 @@ def container() -> Container:
     container = Container()
     loader = YAMLLoader(container)
     loader.load(os.path.join(os.path.dirname(__file__), "imports.yaml"))
-
     return container

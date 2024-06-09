@@ -1,9 +1,9 @@
-class ServiceId:
+class ServiceFactory:
     def __init__(self, value: str) -> None:
         if value is None:
-            raise ServiceIdError("Id must be provided")
+            raise ServiceFactoryError("Factory must be provided")
         if not isinstance(value, str):
-            raise ServiceIdError("Id must be a string")
+            raise ServiceFactoryError("Factory must be a string")
         self._value = value
 
     @property
@@ -11,7 +11,7 @@ class ServiceId:
         return self._value
 
     @classmethod
-    def from_string(cls, value: str) -> "ServiceId":
+    def from_string(cls, value: str) -> "ServiceFactory":
         return cls(value)
 
     def __eq__(self, other: object) -> bool:
@@ -29,5 +29,5 @@ class ServiceId:
         return f"{self.__class__.__name__}(value={self._value})"
 
 
-class ServiceIdError(Exception):
+class ServiceFactoryError(Exception):
     pass

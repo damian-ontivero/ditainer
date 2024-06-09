@@ -1,34 +1,19 @@
 services:
-  service__class_referenced_arguments__no_method:
-    module: tests.utils
-    class:
-      name: Repository
-      arguments:
-        - !ref service__no_class__method_arguments
+  - id: ClassWithFactoryWithNoArguments
+    module: tests.dependencies_2
+    class: ClassWithFactoryWithNoArguments
+    factory: create
 
-  service__no_class__method_tag_1:
-    module: tests.utils
-    method:
-      name: method_with_arguments
-      arguments:
-        - "Diego Maradona"
+  - id: ClassWithFactoryWithEmptyArguments
+    module: tests.dependencies_2
+    class: ClassWithFactoryWithNoArguments
+    factory: create
+    arguments: []
+
+  - id: ClassWithFactoryWithArguments
+    module: tests.dependencies_2
+    class: ClassWithFactoryWithArguments
+    factory: create
+    arguments: ["Angel Di Maria"]
     tags:
       - name_to_say_hello
-
-  service__no_class__method_tag_2:
-    module: tests.utils
-    method:
-      name: method_with_no_arguments
-    tags:
-      - name_to_say_hello
-
-  service__class_tagged_arguments__no_method:
-    module: tests.utils
-    class:
-      name: ClassToSayHello
-      arguments:
-        - !tagged name_to_say_hello
-
-  service__variable:
-    module: tests.utils
-    variable: best_player

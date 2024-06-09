@@ -1,19 +1,33 @@
-from .service_arguments import ServiceArguments
-
-
 class ServiceClass:
-    def __init__(self, name: str, arguments: ServiceArguments):
-        self._name = name
-        self._arguments = arguments
+    def __init__(self, value: str) -> None:
+        if value is None:
+            raise ServiceClassError("Class must be provided")
+        if not isinstance(value, str):
+            raise ServiceClassError("Class must be a string")
+        self._value = value
 
     @property
-    def name(self) -> str:
-        return self._name
-
-    @property
-    def arguments(self) -> ServiceArguments:
-        return self._arguments
+    def value(self) -> str:
+        return self._value
 
     @classmethod
-    def from_primitives(cls, method: dict) -> "ServiceClass":
-        return cls(method.get("name"), ServiceArguments.from_primitives(method.get("arguments", [])))
+    def from_string(cls, value: str) -> "ServiceClass":
+        return cls(value)
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self._value == other._value
+
+    def __ne__(self, other: object) -> bool:
+        return not self.__eq__(other)
+
+    def __hash__(self) -> int:
+        return hash(self._value)
+
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}(value={self._value})"
+
+
+class ServiceClassError(Exception):
+    pass
