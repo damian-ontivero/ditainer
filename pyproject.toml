@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ditainer"
-version = "0.4.7"
+version = "0.4.8"
 description = ""
 authors = ["Damian Ontivero <damian.ontivero@icloud.com>"]
 readme = "README.md"

@@ -3,16 +3,21 @@
 This is a basic Dependency Inection Container for Python.
 
 ## How to use it
-At the moment, `ditainer` can only load dependencies from yaml files.
 
-Dependencies are treated as services.
-These services are classes that can receive arguments to be initialized or not.
-It is also possible to initialize these services through their factory methods, which can also accept arguments.
-Additionally, these services can be tagged with a tag.
+At the moment, `ditainer` can only load dependencies from `yaml` files.
 
-Arguments can be simple, a reference to another service, or a list of all services with a specific tag.
+A dependency is treated as `service`.
+A `service` is a `class` and could receive `arguments` to be initialized.
+It is also possible to initialize a `class` through its `factory`, which may also require `arguments`.
+Additionally, a `service` can be tagged.
 
-An example of yaml file could be:
+Types of `arguments`:
+
+- Simple. Just the literal argument.
+- A reference to another service. The prefix `!ref` followed by the `id` of the other service.
+- All services tagged with a specific tag. The prefix `!tagged` followed by the `tag`.
+
+An example of `yaml` file could be:
 
 ```yaml
 services:
@@ -48,11 +53,10 @@ services:
       - !ref UserRepository
     tags:
       - query_handler
-
 ```
 
-Each service must have id, module and class.
-If the service has no id, module or class, there will be an error.
+Each `service` must have `id`, `module` and `class`.
+If the `service` has no `id`, `module` or `class`, there will be an error.
 
 `ditainer` can also understand an import file with different files to load:
 
@@ -61,11 +65,11 @@ imports:
   - { resource: "./services_1.yaml" }
   - { resource: "./services_2.yaml" }
   - { resource: "./services_3.yaml" }
-
 ```
 
 ### Start using ditainer
-Once the yaml files are ready:
+
+Once the `yaml` files are ready:
 
 ```python
 import os
@@ -80,7 +84,6 @@ loader.load(os.path.join(os.path.dirname(__file__), "imports.yaml"))
 
 ```
 
-
 ```python
 from my_module import container
 from my_module.user import User
@@ -89,7 +92,7 @@ from my_module.user.find_by_id_query import UserFindByIdQuery
 def get_user() -> User:
   query_bus = container.get("QueryBus")
   query = UserFindByIdQuery(123)
-  
+
   user = query_bus.ask(query)
   return user
 ```
