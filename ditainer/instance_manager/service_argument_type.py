@@ -16,19 +16,6 @@ class ServiceArgumentType:
     def value(self) -> str:
         return self._value
 
-    @classmethod
-    def from_string(cls, value: str) -> "ServiceArgumentType":
-        return cls(value)
-
-    def is_simple(self) -> bool:
-        return self._value == self.SIMPLE
-
-    def is_ref(self) -> bool:
-        return self._value == self.REFERENCE
-
-    def is_tagged(self) -> bool:
-        return self._value == self.TAGGED
-
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
@@ -41,7 +28,20 @@ class ServiceArgumentType:
         return hash(self._value)
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}(value={self._value})"
+        return "{c}(value={value!r})".format(c=self.__class__.__name__, value=self._value)
+
+    @classmethod
+    def from_string(cls, value: str) -> "ServiceArgumentType":
+        return cls(value)
+
+    def is_simple(self) -> bool:
+        return self._value == self.SIMPLE
+
+    def is_ref(self) -> bool:
+        return self._value == self.REFERENCE
+
+    def is_tagged(self) -> bool:
+        return self._value == self.TAGGED
 
 
 class ServiceArgumentTypeError(Exception):

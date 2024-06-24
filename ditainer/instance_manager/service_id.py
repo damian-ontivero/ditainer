@@ -10,10 +10,6 @@ class ServiceId:
     def value(self) -> str:
         return self._value
 
-    @classmethod
-    def from_string(cls, value: str) -> "ServiceId":
-        return cls(value)
-
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
@@ -26,7 +22,11 @@ class ServiceId:
         return hash(self._value)
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}(value={self._value})"
+        return "{c}(value={value!r})".format(c=self.__class__.__name__, value=self._value)
+
+    @classmethod
+    def from_string(cls, value: str) -> "ServiceId":
+        return cls(value)
 
 
 class ServiceIdError(Exception):

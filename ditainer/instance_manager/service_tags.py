@@ -11,13 +11,6 @@ class ServiceTags:
     def value(self) -> list[ServiceTag]:
         return self._value
 
-    @classmethod
-    def from_list(cls, tags: list[str]) -> "ServiceTags":
-        return cls([ServiceTag.from_string(tag) for tag in tags])
-
-    def __contains__(self, tag: str) -> bool:
-        return tag in [tag.value for tag in self._value]
-
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
@@ -30,7 +23,14 @@ class ServiceTags:
         return hash(tuple(self._value))
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}(value={self._value})"
+        return "{c}(value={value!r})".format(c=self.__class__.__name__, value=self._value)
+
+    def __contains__(self, tag: str) -> bool:
+        return tag in [tag.value for tag in self._value]
+
+    @classmethod
+    def from_list(cls, tags: list[str]) -> "ServiceTags":
+        return cls([ServiceTag.from_string(tag) for tag in tags])
 
 
 class ServiceTagsError(Exception):

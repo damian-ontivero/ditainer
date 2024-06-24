@@ -10,19 +10,6 @@ class ServiceArgument:
     def value(self) -> str:
         return self._value
 
-    @classmethod
-    def from_primitives(cls, type_: str, value: str) -> "ServiceArgument":
-        return cls(ServiceArgumentType(type_), value)
-
-    def is_simple(self) -> bool:
-        return self._type.is_simple()
-
-    def is_ref(self) -> bool:
-        return self._type.is_ref()
-
-    def is_tagged(self) -> bool:
-        return self._type.is_tagged()
-
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
@@ -35,4 +22,19 @@ class ServiceArgument:
         return hash((self._type, self._value))
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}(type={self._type}, value={self._value})"
+        return "{c}(type={type!r}, value={value!r})".format(
+            c=self.__class__.__name__, type=self._type, value=self._value
+        )
+
+    @classmethod
+    def from_primitives(cls, type_: str, value: str) -> "ServiceArgument":
+        return cls(ServiceArgumentType(type_), value)
+
+    def is_simple(self) -> bool:
+        return self._type.is_simple()
+
+    def is_ref(self) -> bool:
+        return self._type.is_ref()
+
+    def is_tagged(self) -> bool:
+        return self._type.is_tagged()

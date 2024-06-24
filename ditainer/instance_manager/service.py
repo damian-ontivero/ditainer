@@ -16,12 +16,6 @@ class Service:
         arguments: ServiceArguments | None,
         tags: ServiceTags | None,
     ):
-        if id is None:
-            raise ServiceError("Id must be provided")
-        if module is None:
-            raise ServiceError("Module must be provided")
-        if class_ is None:
-            raise ServiceError("Class must be provided")
         self._id = id
         self._module = module
         self._class = class_
@@ -53,19 +47,6 @@ class Service:
     def tags(self) -> ServiceTags:
         return self._tags
 
-    @classmethod
-    def from_primitives(
-        cls, id: str, module: str, class_: str, factory: str | None, arguments: list | None, tags: list | None
-    ) -> "Service":
-        return cls(
-            ServiceId.from_string(id),
-            ServiceModule.from_string(module),
-            ServiceClass.from_string(class_),
-            ServiceFactory.from_string(factory) if factory else None,
-            ServiceArguments.from_list(arguments) if arguments else None,
-            ServiceTags.from_list(tags) if tags else None,
-        )
-
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
@@ -86,8 +67,35 @@ class Service:
 
     def __repr__(self) -> str:
         return (
-            f"{self.__class__.__name__}(id={self._id}, module={self._module}, class={self._class}, "
-            f"factory={self._factory}, arguments={self._arguments}, tags={self._tags})"
+            "{c}(id={id!r}, module={module!r}, class={class_!r}, "
+            "factory={factory!r}, arguments={arguments!r}, tags={tags!r})"
+        ).format(
+            c=self.__class__.__name__,
+            id=self._id,
+            module=self._module,
+            class_=self._class,
+            factory=self._factory,
+            arguments=self._arguments,
+            tags=self._tags,
+        )
+
+    @classmethod
+    def from_primitives(
+        cls, id: str, module: str, class_: str, factory: str | None, arguments: list | None, tags: list | None
+    ) -> "Service":
+        if id is None:
+            raise ServiceError("Id must be provided")
+        if module is None:
+            raise ServiceError("Module must be provided")
+        if class_ is None:
+            raise ServiceError("Class must be provided")
+        return cls(
+            ServiceId.from_string(id),
+            ServiceModule.from_string(module),
+            ServiceClass.from_string(class_),
+            ServiceFactory.from_string(factory) if factory else None,
+            ServiceArguments.from_list(arguments) if arguments else None,
+            ServiceTags.from_list(tags) if tags else None,
         )
 
 
