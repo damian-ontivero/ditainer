@@ -1,9 +1,12 @@
-def test_service__class_with_no_arguments(container) -> None:
+from ditainer.container import Container
+
+
+def test_service__class_with_no_arguments(container: Container) -> None:
     """
     This test is to check the service with:
     - Class with no arguments.
     """
-    dependency = container.get("ClassWithNoArguments")
+    dependency = container.find("ClassWithNoArguments")
 
     result = dependency.run()
 
@@ -11,12 +14,12 @@ def test_service__class_with_no_arguments(container) -> None:
     assert result == "Lionel Messi"
 
 
-def test_service__class_with_empty_arguments(container) -> None:
+def test_service__class_with_empty_arguments(container: Container) -> None:
     """
     This test is to check the service with:
     - Class with empty arguments.
     """
-    dependency = container.get("ClassWithNoArguments")
+    dependency = container.find("ClassWithNoArguments")
 
     result = dependency.run()
 
@@ -24,12 +27,12 @@ def test_service__class_with_empty_arguments(container) -> None:
     assert result == "Lionel Messi"
 
 
-def test_service__class_with_arguments(container) -> None:
+def test_service__class_with_arguments(container: Container) -> None:
     """
     This test is to check the service with:
     - Class with arguments.
     """
-    dependency = container.get("ClassWithArguments")
+    dependency = container.find("ClassWithArguments")
 
     result = dependency.run()
 

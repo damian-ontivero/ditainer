@@ -1,9 +1,12 @@
-def test_service__class_with_factory_with_no_arguments(container) -> None:
+from ditainer.container import Container
+
+
+def test_service__class_with_factory_with_no_arguments(container: Container) -> None:
     """
     This test is to check the service with:
     - Class with factory with no arguments.
     """
-    dependency = container.get("ClassWithFactoryWithNoArguments")
+    dependency = container.find("ClassWithFactoryWithNoArguments")
 
     result = dependency.run()
 
@@ -11,12 +14,12 @@ def test_service__class_with_factory_with_no_arguments(container) -> None:
     assert result == "Angel Di Maria"
 
 
-def test_service__class_with_factory_with_empty_arguments(container) -> None:
+def test_service__class_with_factory_with_empty_arguments(container: Container) -> None:
     """
     This test is to check the service with:
     - Class with factory with empty arguments.
     """
-    dependency = container.get("ClassWithFactoryWithEmptyArguments")
+    dependency = container.find("ClassWithFactoryWithEmptyArguments")
 
     result = dependency.run()
 
@@ -24,12 +27,12 @@ def test_service__class_with_factory_with_empty_arguments(container) -> None:
     assert result == "Angel Di Maria"
 
 
-def test_service__class_with_factory_with_arguments(container) -> None:
+def test_service__class_with_factory_with_arguments(container: Container) -> None:
     """
     This test is to check the service with:
     - Class with factory with arguments.
     """
-    dependency = container.get("ClassWithFactoryWithArguments")
+    dependency = container.find("ClassWithFactoryWithArguments")
 
     result = dependency.run()
 

@@ -8,11 +8,18 @@ class InstanceManager:
     def __init__(self, services: set[Service]) -> None:
         self._services = services
 
-    def get_instance(self, service_id: str) -> object:
+    def find(self, id: str) -> object:
         for service in self._services:
-            if service.id.value == service_id:
+            if service.id.value == id:
                 return self._create_instance(service)
-        raise ServiceNotFoundError(f"Service: {service_id!r} not found")
+        raise ServiceNotFoundError(f"Service: {id!r} not found")
+
+    def find_tagged(self, tag: str) -> list:
+        instances = []
+        for service in self._services:
+            if service.tags and tag in service.tags:
+                instances.append(self._create_instance(service))
+        return instances
 
     def _create_instance(self, service: Service) -> object:
         if service.factory is not None:
@@ -38,12 +45,12 @@ class InstanceManager:
         resolved_arguments = []
         for argument in arguments.value:
             if argument.is_ref():
-                resolved_arguments.append(self.get_instance(argument.value))
+                resolved_arguments.append(self.find(argument.value))
             elif argument.is_tagged():
                 instances = []
                 for service in self._services:
                     if service.tags and argument.value in service.tags:
-                        instances.append(self.get_instance(service.id.value))
+                        instances.append(self.find(service.id.value))
                 resolved_arguments.append(instances)
             else:
                 resolved_arguments.append(argument.value)

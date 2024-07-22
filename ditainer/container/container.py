@@ -27,5 +27,8 @@ class Container:
         )
         self._services.add(service_)
 
-    def get(self, service_id: str) -> object:
-        return self.instance_manager.get_instance(service_id)
+    def find(self, id: str) -> object:
+        return self.instance_manager.find(id)
+
+    def find_tagged(self, tag: str) -> list:
+        return self.instance_manager.find_tagged(tag)

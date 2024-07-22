@@ -90,12 +90,24 @@ from my_module.user import User
 from my_module.user.find_by_id_query import UserFindByIdQuery
 
 def get_user() -> User:
-  query_bus = container.get("QueryBus")
+  query_bus = container.find("QueryBus")
   query = UserFindByIdQuery(123)
 
   user = query_bus.ask(query)
   return user
 ```
+
+It is also possible to find services by tags:
+
+```python
+from my_module import container
+from my_module.user import User
+from my_module.user.find_by_id_query import UserFindByIdQuery
+
+
+query_handlers = container.find_tagged("query_handler")
+```
+
 
 You can find more examples in the tests folder.
 
