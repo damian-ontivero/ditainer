@@ -1,4 +1,5 @@
-from ditainer.instance_manager import InstanceManager, Service
+from ditainer.instance_manager.instance_manager import InstanceManager
+from ditainer.instance_manager.service import Service
 
 
 class Container:

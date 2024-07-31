@@ -1,4 +1,4 @@
-from .service_tag import ServiceTag
+from ditainer.instance_manager.service_tag import ServiceTag
 
 
 class ServiceTags:

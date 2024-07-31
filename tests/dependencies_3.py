@@ -1,4 +1,4 @@
-from .dependencies_2 import ClassWithFactoryWithArguments, ClassWithFactoryWithNoArguments
+from tests.dependencies_2 import ClassWithFactoryWithArguments, ClassWithFactoryWithNoArguments
 
 
 class ClassWithReferencedArguments:

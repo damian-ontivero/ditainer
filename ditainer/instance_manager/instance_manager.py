@@ -1,7 +1,7 @@
 import importlib
 
-from .service import Service
-from .service_arguments import ServiceArguments
+from ditainer.instance_manager.service import Service
+from ditainer.instance_manager.service_arguments import ServiceArguments
 
 
 class InstanceManager:

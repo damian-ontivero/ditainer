@@ -1,4 +1,4 @@
-from .service_argument_type import ServiceArgumentType
+from ditainer.instance_manager.service_argument_type import ServiceArgumentType
 
 
 class ServiceArgument:

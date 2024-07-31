@@ -2,8 +2,8 @@ import os
 
 import pytest
 
-from ditainer.container import Container
-from ditainer.loader import YAMLLoader
+from ditainer.container.container import Container
+from ditainer.loader.yaml_loader import YAMLLoader
 
 
 @pytest.fixture(scope="session", autouse=True)
