@@ -1,31 +1,36 @@
-[tool.poetry]
-name = "ditainer"
-version = "0.4.12"
-description = ""
-authors = ["Damian Ontivero <damian.ontivero@icloud.com>"]
-readme = "README.md"
-
-[tool.poetry.dependencies]
-python = "^3.12"
-pyyaml = "^6.0.1"
-
-[tool.poetry.group.dev.dependencies]
-black = "^24.3.0"
-faker = "^24.2.0"
-flake8 = "^7.0.0"
-ipdb = "^0.13.13"
-pytest = "^8.1.1"
-isort = "^5.13.2"
-twine = "^5.0.0"
-
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
 
-[tool.black]
+[project]
+name = "ditainer"
+description = "Dependency Injection Container for Python"
+version = "0.4.28"
+requires-python = ">=3.12"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Damian Ontivero", email = "damian.ontivero.dev@gmail.com" },
+]
+dependencies = ["pyyaml>=6.0.1"]
+
+[project.urls]
+Homepage = "https://github.com/damian-ontivero/ditainer"
+Repository = "https://github.com/damian-ontivero/ditainer"
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.build]
+includes = ["ditainer"]
+excludes = ["tests"]
+
+[tool.pdm.dev-dependencies]
+dev = ["ipdb>=0.13.13", "ruff>=0.5.5"]
+test = ["pytest>=8.3.2"]
+
+[tool.ruff]
 line-length = 120
-skip-magic-trailing-comma = true
 
-[tool.isort]
-profile = "black"
-line_length = 120
+[tool.ruff.format]
+skip-magic-trailing-comma = false
