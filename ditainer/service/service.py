@@ -1,9 +1,9 @@
-from ditainer.instance_manager.service_arguments import ServiceArguments
-from ditainer.instance_manager.service_class import ServiceClass
-from ditainer.instance_manager.service_factory import ServiceFactory
-from ditainer.instance_manager.service_id import ServiceId
-from ditainer.instance_manager.service_module import ServiceModule
-from ditainer.instance_manager.service_tags import ServiceTags
+from ditainer.service.service_arguments import ServiceArguments
+from ditainer.service.service_class import ServiceClass
+from ditainer.service.service_factory import ServiceFactory
+from ditainer.service.service_id import ServiceId
+from ditainer.service.service_module import ServiceModule
+from ditainer.service.service_tags import ServiceTags
 
 
 class Service:

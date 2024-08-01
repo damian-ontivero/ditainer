@@ -1,4 +1,4 @@
-from ditainer.container.container import Container
+from ditainer.container import Container
 
 
 def test_service__class_with_no_arguments(container: Container) -> None:

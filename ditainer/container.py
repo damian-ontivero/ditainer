@@ -1,5 +1,5 @@
-from ditainer.instance_manager.instance_manager import InstanceManager
-from ditainer.instance_manager.service import Service
+from ditainer.instance_manager import InstanceManager
+from ditainer.service.service import Service
 
 
 class Container:
@@ -8,7 +8,7 @@ class Container:
     """
 
     def __init__(self) -> None:
-        self._services = set()
+        self._services: set[Service] = set()
         self._instance_manager: InstanceManager = None
 
     @property

@@ -1,7 +1,7 @@
 import abc
 import os
 
-from ditainer.container.container import Container
+from ditainer.container import Container
 
 
 class Loader(metaclass=abc.ABCMeta):
