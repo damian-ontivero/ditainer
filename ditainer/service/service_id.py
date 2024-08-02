@@ -1,9 +1,12 @@
+from ditainer.exception.service import ServiceIdError
+
+
 class ServiceId:
     def __init__(self, value: str) -> None:
         if value is None:
-            raise ServiceIdError("Id must be provided")
+            raise ServiceIdError("The id value cannot be None")
         if not isinstance(value, str):
-            raise ServiceIdError("Id must be a string")
+            raise ServiceIdError("The id value must be a string")
         self._value = value
 
     @property
@@ -27,7 +30,3 @@ class ServiceId:
     @classmethod
     def from_string(cls, value: str) -> "ServiceId":
         return cls(value)
-
-
-class ServiceIdError(Exception):
-    pass

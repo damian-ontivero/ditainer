@@ -4,6 +4,7 @@ from ditainer.service.service_factory import ServiceFactory
 from ditainer.service.service_id import ServiceId
 from ditainer.service.service_module import ServiceModule
 from ditainer.service.service_tags import ServiceTags
+from ditainer.exception.service import ServiceError
 
 
 class Service:
@@ -77,11 +78,11 @@ class Service:
         cls, id: str, module: str, class_: str, factory: str | None, arguments: list | None, tags: list | None
     ) -> "Service":
         if id is None:
-            raise ServiceError("Id must be provided")
+            raise ServiceError("The id value cannot be None")
         if module is None:
-            raise ServiceError("Module must be provided")
+            raise ServiceError("The module value cannot be None")
         if class_ is None:
-            raise ServiceError("Class must be provided")
+            raise ServiceError("The class value cannot be None")
         return cls(
             ServiceId.from_string(id),
             ServiceModule.from_string(module),
@@ -90,7 +91,3 @@ class Service:
             ServiceArguments.from_list(arguments) if arguments else None,
             ServiceTags.from_list(tags) if tags else None,
         )
-
-
-class ServiceError(Exception):
-    pass

@@ -1,5 +1,6 @@
 import abc
 import os
+from ditainer.exception.loader import LoaderError
 
 from ditainer.container import Container
 
@@ -13,7 +14,7 @@ class Loader(metaclass=abc.ABCMeta):
 
     def __init__(self, container: Container) -> None:
         if not isinstance(container, Container):
-            raise LoaderError("container must be an instance of Container")
+            raise LoaderError("The container must be an instance of Container.")
         self._container = container
         self._file_path = None
 
@@ -42,7 +43,3 @@ class Loader(metaclass=abc.ABCMeta):
         """
         for service in services:
             self._container.register_service(service)
-
-
-class LoaderError(Exception):
-    pass

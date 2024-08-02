@@ -1,5 +1,5 @@
 import yaml
-
+from ditainer.exception.loader import YAMLLoaderError
 from ditainer.loader.loader import Loader
 
 yaml.add_constructor("!ref", lambda loader, node: "!ref " + loader.construct_scalar(node))
@@ -13,12 +13,8 @@ class YAMLLoader(Loader):
             with open(self._file_path, "r") as file:
                 data: dict = yaml.load(file, Loader=yaml.FullLoader)
         except FileNotFoundError:
-            raise YAMLLoaderError(f"File: {self._file_path!r} not found")
+            raise YAMLLoaderError(f"The file {self._file_path!r} was not found")
         if "imports" in data:
             self._process_imports(data["imports"])
         if "services" in data:
             self._process_services(data["services"])
-
-
-class YAMLLoaderError(Exception):
-    pass

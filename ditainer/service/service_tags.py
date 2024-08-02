@@ -1,9 +1,13 @@
+from ditainer.exception.service import ServiceTagError
+from ditainer.exception.service import ServiceTagsError
+
+
 class ServiceTag:
     def __init__(self, value: str) -> None:
         if value is None:
-            raise ServiceTagError("Tag must be provided")
+            raise ServiceTagError("The tag value cannot be None")
         if not isinstance(value, str):
-            raise ServiceTagError("Tag must be a string")
+            raise ServiceTagError("The tag value must be a string")
         self._value = value
 
     @property
@@ -27,10 +31,6 @@ class ServiceTag:
     @classmethod
     def from_string(cls, value: str) -> "ServiceTag":
         return cls(value)
-
-
-class ServiceTagError(Exception):
-    pass
 
 
 class ServiceTags:
@@ -63,7 +63,3 @@ class ServiceTags:
     @classmethod
     def from_list(cls, tags: list[str]) -> "ServiceTags":
         return cls([ServiceTag.from_string(tag) for tag in tags])
-
-
-class ServiceTagsError(Exception):
-    pass

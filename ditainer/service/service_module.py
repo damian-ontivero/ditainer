@@ -1,9 +1,12 @@
+from ditainer.exception.service import ServiceModuleError
+
+
 class ServiceModule:
     def __init__(self, value: str) -> None:
         if value is None:
-            raise ServiceModuleError("Path must be provided")
+            raise ServiceModuleError("The module value cannot be None")
         if not isinstance(value, str):
-            raise ServiceModuleError("Path must be a string")
+            raise ServiceModuleError("The module value must be a string")
         self._value = value
 
     @property
@@ -27,7 +30,3 @@ class ServiceModule:
     @classmethod
     def from_string(cls, value: str) -> "ServiceModule":
         return cls(value)
-
-
-class ServiceModuleError(Exception):
-    pass

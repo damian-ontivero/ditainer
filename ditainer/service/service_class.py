@@ -1,9 +1,12 @@
+from ditainer.exception.service import ServiceClassError
+
+
 class ServiceClass:
     def __init__(self, value: str) -> None:
         if value is None:
-            raise ServiceClassError("Class must be provided")
+            raise ServiceClassError("The class value cannot be None")
         if not isinstance(value, str):
-            raise ServiceClassError("Class must be a string")
+            raise ServiceClassError("The class value must be a string")
         self._value = value
 
     @property
@@ -27,7 +30,3 @@ class ServiceClass:
     @classmethod
     def from_string(cls, value: str) -> "ServiceClass":
         return cls(value)
-
-
-class ServiceClassError(Exception):
-    pass
