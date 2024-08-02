@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from ditainer.container.container import Container
+from ditainer.container import Container
 from ditainer.loader.yaml_loader import YAMLLoader
 
 
