@@ -50,20 +50,13 @@ class Service:
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
-        return (
-            self._id == other._id
-            and self._module == other._module
-            and self._class == other._class
-            and self._factory == other._factory
-            and self._arguments == other._arguments
-            and self._tags == other._tags
-        )
+        return self._id == other._id
 
     def __ne__(self, other: object) -> bool:
         return not self.__eq__(other)
 
     def __hash__(self) -> int:
-        return hash((self._id, self._module, self._class, self._factory, self._arguments, self._tags))
+        return hash(self._id)
 
     def __repr__(self) -> str:
         return (
