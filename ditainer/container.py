@@ -9,7 +9,7 @@ class Container:
 
     def __init__(self) -> None:
         self._services: set[Service] = set()
-        self._instance_manager: InstanceManager = None
+        self._instance_manager: InstanceManager | None = None
 
     @property
     def instance_manager(self) -> InstanceManager:
