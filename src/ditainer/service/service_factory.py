@@ -1,12 +1,12 @@
-from ditainer.exception.service import ServiceIdError
+from src.ditainer.exception.service import ServiceFactoryError
 
 
-class ServiceId:
+class ServiceFactory:
     def __init__(self, value: str) -> None:
         if value is None:
-            raise ServiceIdError("The id value cannot be None")
+            raise ServiceFactoryError("The factory value cannot be None")
         if not isinstance(value, str):
-            raise ServiceIdError("The id value must be a string")
+            raise ServiceFactoryError("The factory value must be a string")
         self._value = value
 
     @property
@@ -28,5 +28,5 @@ class ServiceId:
         return "{c}(value={value!r})".format(c=self.__class__.__name__, value=self._value)
 
     @classmethod
-    def from_string(cls, value: str) -> "ServiceId":
+    def from_string(cls, value: str) -> "ServiceFactory":
         return cls(value)

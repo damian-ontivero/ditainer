@@ -1,10 +1,10 @@
-from ditainer.service.service_arguments import ServiceArguments
-from ditainer.service.service_class import ServiceClass
-from ditainer.service.service_factory import ServiceFactory
-from ditainer.service.service_id import ServiceId
-from ditainer.service.service_module import ServiceModule
-from ditainer.service.service_tags import ServiceTags
-from ditainer.exception.service import ServiceError
+from src.ditainer.exception.service import ServiceError
+from src.ditainer.service.service_arguments import ServiceArguments
+from src.ditainer.service.service_class import ServiceClass
+from src.ditainer.service.service_factory import ServiceFactory
+from src.ditainer.service.service_id import ServiceId
+from src.ditainer.service.service_module import ServiceModule
+from src.ditainer.service.service_tags import ServiceTags
 
 
 class Service:
@@ -75,7 +75,13 @@ class Service:
 
     @classmethod
     def from_primitives(
-        cls, id: str, module: str, class_: str, factory: str | None, arguments: list | None, tags: list | None
+        cls,
+        id: str,
+        module: str,
+        class_: str,
+        factory: str | None,
+        arguments: list | None,
+        tags: list | None,
     ) -> "Service":
         if id is None:
             raise ServiceError("The id value cannot be None")

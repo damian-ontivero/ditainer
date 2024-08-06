@@ -74,8 +74,8 @@ Once the yaml files are ready:
 ```python
 import os
 
-from ditainer.container import Container
-from ditainer.loader import YAMLLoader
+from src.ditainer.container import Container
+from src.ditainer.loader import YAMLLoader
 
 
 container = Container()

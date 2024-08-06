@@ -1,5 +1,5 @@
-from ditainer.instance_manager import InstanceManager
-from ditainer.service.service import Service
+from src.ditainer.instance_manager import InstanceManager
+from src.ditainer.service.service import Service
 
 
 class Container:

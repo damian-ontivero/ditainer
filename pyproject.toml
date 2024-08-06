@@ -1,35 +1,37 @@
-[build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
-
-
 [project]
 name = "ditainer"
+version = "0.4.34"
 description = "Dependency Injection Container for Python"
-version = "0.4.33"
-requires-python = ">=3.12"
-readme = "README.md"
-license = { file = "LICENSE" }
 authors = [
     { name = "Damian Ontivero", email = "damian.ontivero.dev@gmail.com" },
 ]
 dependencies = ["pyyaml>=6.0.1"]
+requires-python = ">=3.12"
+readme = "README.md"
+license = { text = "MIT" }
 
 [project.urls]
 Homepage = "https://github.com/damian-ontivero/ditainer"
 Repository = "https://github.com/damian-ontivero/ditainer"
 
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
 
 [tool.pdm]
 distribution = true
 
-[tool.pdm.build]
-includes = ["ditainer"]
-excludes = ["tests"]
-
 [tool.pdm.dev-dependencies]
-dev = ["ipdb>=0.13.13", "ruff>=0.5.5"]
+dev = ["pre-commit>=3.8.0"]
+debug = ["ipdb>=0.13.13"]
+format = ["ruff>=0.5.6"]
 test = ["pytest>=8.3.2"]
+
+[tool.pdm.scripts]
+"lint" = { cmd = "ruff check --fix" }
+"format" = { cmd = "ruff format" }
+"test" = { cmd = "pytest tests -vs" }
 
 
 [tool.ruff]

@@ -1,8 +1,8 @@
 import importlib
 
-from ditainer.service.service import Service
-from ditainer.service.service_arguments import ServiceArguments
-from ditainer.exception.instance_manager import ServiceNotFoundError
+from src.ditainer.exception.instance_manager import ServiceNotFoundError
+from src.ditainer.service.service import Service
+from src.ditainer.service.service_arguments import ServiceArguments
 
 
 class InstanceManager:
