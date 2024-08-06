@@ -1,4 +1,5 @@
-from src.ditainer.exception.service import ServiceTagError, ServiceTagsError
+from src.ditainer.exception.service import ServiceTagError
+from src.ditainer.exception.service import ServiceTagsError
 
 
 class ServiceTag:

@@ -3,6 +3,7 @@ import yaml
 from src.ditainer.exception.loader import YAMLLoaderError
 from src.ditainer.loader.loader import Loader
 
+
 yaml.add_constructor("!ref", lambda loader, node: "!ref " + loader.construct_scalar(node))
 yaml.add_constructor("!tagged", lambda loader, node: "!tagged " + loader.construct_scalar(node))
 

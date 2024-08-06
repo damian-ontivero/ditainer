@@ -1,6 +1,6 @@
 [project]
 name = "ditainer"
-version = "0.4.34"
+version = "0.4.35"
 description = "Dependency Injection Container for Python"
 authors = [
     { name = "Damian Ontivero", email = "damian.ontivero.dev@gmail.com" },
@@ -22,6 +22,12 @@ build-backend = "pdm.backend"
 [tool.pdm]
 distribution = true
 
+[tool.pdm.build]
+excludes = ["./**/.git"]
+package-dir = "src"
+includes = ["src/ditainer"]
+source-includes = ["tests", "LICENSE", "README.md"]
+
 [tool.pdm.dev-dependencies]
 dev = ["pre-commit>=3.8.0"]
 debug = ["ipdb>=0.13.13"]
@@ -36,6 +42,19 @@ test = ["pytest>=8.3.2"]
 
 [tool.ruff]
 line-length = 120
+src = ["src"]
 
 [tool.ruff.format]
 skip-magic-trailing-comma = false
+
+[tool.ruff.lint]
+select = [
+    # isort
+    "I",
+]
+
+[tool.ruff.lint.isort]
+force-single-line = true
+lines-between-types = 1
+lines-after-imports = 2
+known-first-party = ["ditainer"]
