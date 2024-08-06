@@ -23,13 +23,3 @@ repos:
         args:
           - --fix
       - id: ruff-format
-
-  # - repo: https://github.com/pycqa/isort
-  #   rev: 5.13.2
-  #   hooks:
-  #     - id: isort
-  #       name: isort (python)
-
-# ci:
-#   autofix_commit_msg: "style(pre-commit.ci): 🎨 auto fixes from pre-commit.com hooks"
-#   autoupdate_commit_msg: "style(pre-commit.ci): ⬆ pre-commit autoupdate"
