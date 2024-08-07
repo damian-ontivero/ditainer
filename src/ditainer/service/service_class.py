@@ -1,4 +1,4 @@
-from src.ditainer.exception.service import ServiceClassError
+from ditainer.exception.service import ServiceClassError
 
 
 class ServiceClass:

@@ -1,4 +1,4 @@
-from src.ditainer.exception.service import ServiceIdError
+from ditainer.exception.service import ServiceIdError
 
 
 class ServiceId:

@@ -1,4 +1,4 @@
-from src.ditainer.exception.service import ServiceFactoryError
+from ditainer.exception.service import ServiceFactoryError
 
 
 class ServiceFactory:

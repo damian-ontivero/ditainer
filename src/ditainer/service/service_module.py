@@ -1,4 +1,4 @@
-from src.ditainer.exception.service import ServiceModuleError
+from ditainer.exception.service import ServiceModuleError
 
 
 class ServiceModule:

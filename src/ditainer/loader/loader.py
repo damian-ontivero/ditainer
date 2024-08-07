@@ -1,8 +1,8 @@
 import abc
 import os
 
-from src.ditainer.container import Container
-from src.ditainer.exception.loader import LoaderError
+from ditainer.container import Container
+from ditainer.exception.loader import LoaderError
 
 
 class Loader(metaclass=abc.ABCMeta):
