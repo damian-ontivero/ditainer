@@ -45,7 +45,7 @@ line-length = 120
 src = ["src"]
 
 [tool.ruff.format]
-skip-magic-trailing-comma = false
+skip-magic-trailing-comma = true
 
 [tool.ruff.lint]
 select = [
