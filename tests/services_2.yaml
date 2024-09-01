@@ -1,0 +1,19 @@
+services:
+  - id: ClassWithFactoryWithNoArguments
+    module: tests.dependencies_2
+    class: ClassWithFactoryWithNoArguments
+    factory: create
+
+  - id: ClassWithFactoryWithEmptyArguments
+    module: tests.dependencies_2
+    class: ClassWithFactoryWithNoArguments
+    factory: create
+    arguments: []
+
+  - id: ClassWithFactoryWithArguments
+    module: tests.dependencies_2
+    class: ClassWithFactoryWithArguments
+    factory: create
+    arguments: ["Angel Di Maria"]
+    tags:
+      - name_to_say_hello

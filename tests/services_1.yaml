@@ -1,0 +1,14 @@
+services:
+  - id: ClassWithNoArguments
+    module: tests.dependencies_1
+    class: ClassWithNoArguments
+
+  - id: ClassWithEmptyArguments
+    module: tests.dependencies_1
+    class: ClassWithNoArguments
+    arguments: []
+
+  - id: ClassWithArguments
+    module: tests.dependencies_1
+    class: ClassWithArguments
+    arguments: ["Lionel Messi"]

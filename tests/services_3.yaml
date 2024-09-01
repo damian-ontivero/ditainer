@@ -1,0 +1,11 @@
+services:
+  - id: ClassWithReferencedArguments
+    module: tests.dependencies_3
+    class: ClassWithReferencedArguments
+    arguments: [!ref ClassWithFactoryWithNoArguments]
+
+  - id: ClassWithTaggedArguments
+    module: tests.dependencies_3
+    class: ClassWithTaggedArguments
+    arguments:
+      - !tagged name_to_say_hello
