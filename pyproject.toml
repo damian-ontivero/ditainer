@@ -1,6 +1,6 @@
 [project]
 name = "ditainer"
-version = "1.1.0"
+version = "1.2.0"
 description = "Dependency Injection Container for Python"
 authors = [
     { name = "Damian Ontivero", email = "damian.ontivero.dev@gmail.com" },
