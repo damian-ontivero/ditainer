@@ -1,0 +1,26 @@
+services:
+  - id: ServiceA
+    module: tests.dependencies_4
+    class: ServiceA
+    arguments:
+      - !ref Bus
+
+  - id: ServiceB
+    module: tests.dependencies_4
+    class: ServiceB
+    arguments:
+      - !ref Bus
+
+  - id: Bus
+    module: tests.dependencies_4
+    class: Bus
+    arguments:
+      - !tagged subscriber
+
+  - id: Subscriber
+    module: tests.dependencies_4
+    class: Subscriber
+    arguments:
+      - !ref ServiceB
+    tags:
+      - subscriber
