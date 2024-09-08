@@ -34,4 +34,4 @@ class Container:
         return self.instance_manager.find(id)
 
     def find_tagged(self, tag: str) -> list:
-        return self.instance_manager.find_tagged(tag)
+        return self.instance_manager.search_tagged(tag)

@@ -2,3 +2,4 @@ imports:
   - { resource: "./services_1.yaml" }
   - { resource: "./services_2.yaml" }
   - { resource: "./services_3.yaml" }
+  - { resource: "./services_4.yaml" }
