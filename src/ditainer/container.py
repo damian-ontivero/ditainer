@@ -1,3 +1,5 @@
+from typing import Any
+
 from ditainer.instance_manager import InstanceManager
 from ditainer.service.service import Service
 
@@ -30,8 +32,8 @@ class Container:
 
         self._services.add(service_)
 
-    def find(self, id: str) -> object:
+    def find(self, id: str) -> Any:
         return self.instance_manager.find(id)
 
-    def find_tagged(self, tag: str) -> list:
+    def find_tagged(self, tag: str) -> list[Any]:
         return self.instance_manager.search_tagged(tag)

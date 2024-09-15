@@ -1,5 +1,6 @@
 import importlib
 
+from typing import Any
 from typing import Callable
 
 from ditainer.exception.instance_manager import ServiceNotFoundError
@@ -39,9 +40,9 @@ class LazyProxy:
 class InstanceManager:
     def __init__(self, services: set[Service]) -> None:
         self._services = services
-        self._instances: dict[str, object] = {}
+        self._instances: dict[str, Any] = {}
 
-    def _find(self, id: str) -> object:
+    def _find(self, id: str) -> Any:
         if id in self._instances:
             return self._instances[id]
 
@@ -52,7 +53,7 @@ class InstanceManager:
 
         return self._create_instance(service)
 
-    def _search_tagged(self, tag: str) -> list[object]:
+    def _search_tagged(self, tag: str) -> list[Any]:
         tagged_services = [service for service in self._services if service.tags and tag in service.tags]
 
         return [self._find(tagged_service.id.value) for tagged_service in tagged_services]
@@ -61,7 +62,7 @@ class InstanceManager:
         return LazyProxy(lambda: self._find(id))
 
     def _resolve_arguments(self, arguments: ServiceArguments) -> list:
-        resolved_arguments: list[object] = []
+        resolved_arguments: list[Any] = []
 
         for argument in arguments.value:
             if argument.is_ref():
@@ -74,7 +75,7 @@ class InstanceManager:
 
         return resolved_arguments
 
-    def _create_instance(self, service: Service) -> object:
+    def _create_instance(self, service: Service) -> Any:
         if service.id.value in self._instances:
             return self._instances[service.id.value]
 
@@ -91,8 +92,8 @@ class InstanceManager:
 
         return instance
 
-    def find(self, id: str) -> object:
+    def find(self, id: str) -> Any:
         return self._find(id)
 
-    def search_tagged(self, tag: str) -> list[object]:
+    def search_tagged(self, tag: str) -> list[Any]:
         return self._search_tagged(tag)
