@@ -54,7 +54,9 @@ class InstanceManager:
         return self._create_instance(service)
 
     def _search_tagged(self, tag: str) -> list[Any]:
-        tagged_services = [service for service in self._services if service.tags and tag in service.tags]
+        tagged_services = [
+            service for service in self._services if service.tags and tag in service.tags
+        ]
 
         return [self._find(tagged_service.id.value) for tagged_service in tagged_services]
 

@@ -1,22 +1,27 @@
 [project]
 name = "ditainer"
-version = "1.2.0"
+version = "1.2.1"
 description = "Dependency Injection Container for Python"
 authors = [
-    { name = "Damian Ontivero", email = "damian.ontivero.dev@gmail.com" },
+    {name = "Damián Ontivero", email = "damian.ontivero.dev@gmail.com"},
 ]
-dependencies = ["pyyaml>=6.0.1"]
-requires-python = "==3.12.*"
+dependencies = ["pyyaml>=6.0.2"]
+requires-python = ">=3.12,<3.14"
 readme = "README.md"
-license = { text = "MIT" }
-
-[project.urls]
-Homepage = "https://github.com/damian-ontivero/ditainer"
-Repository = "https://github.com/damian-ontivero/ditainer"
+license = {text = "MIT"}
 
 [build-system]
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.2.0",
+    "ipdb>=0.13.13",
+]
+test = [
+    "pytest>=8.3.5",
+]
 
 
 [tool.pdm]
@@ -28,20 +33,15 @@ includes = ["src/ditainer"]
 excludes = ["./**/.git"]
 source-includes = ["tests", "LICENSE", "README.md"]
 
-[tool.pdm.dev-dependencies]
-dev = ["pre-commit>=3.8.0", "ipdb>=0.13.13"]
-test = ["pytest>=8.3.2"]
-
 [tool.pdm.scripts]
 pc-install = { cmd = "pre-commit install" }
 pc-run = { cmd = "pre-commit run --all-files" }
 lint = { cmd = "pre-commit run ruff --all-files" }
 tests = { cmd = "pytest tests -vs" }
 
-
 [tool.ruff]
 src = ["src"]
-line-length = 120
+line-length = 100
 
 [tool.ruff.format]
 skip-magic-trailing-comma = true
