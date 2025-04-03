@@ -76,7 +76,13 @@ class Service:
 
     @classmethod
     def from_primitives(
-        cls, id: str, module: str, class_: str, factory: str | None, arguments: list | None, tags: list | None
+        cls,
+        id: str,
+        module: str,
+        class_: str,
+        factory: str | None,
+        arguments: list | None,
+        tags: list | None,
     ) -> "Service":
         if id is None:
             raise ServiceError("The id value cannot be None")
