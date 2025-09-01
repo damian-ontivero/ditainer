@@ -13,28 +13,52 @@ class LazyProxy:
         self._resolver = resolver
 
     def __call__(self, *args, **kwargs):
-        # Resolve the service instance when the lazy reference is called.
+        """
+        Resolve the service instance when the lazy reference is called.
+        """
         instance = self._resolver()
 
         return instance(*args, **kwargs)
 
     def __getattr__(self, item):
-        # Resolve the service instance when an attribute or method is accessed.
+        """
+        Resolve the service instance when an attribute or method is accessed.
+        """
         instance = self._resolver()
 
         return getattr(instance, item)
 
     def __enter__(self):
-        # Resolve the service instance when the lazy reference is used in a context manager.
+        """
+        Resolve the service instance when the lazy reference is used in a context manager.
+        """
         instance = self._resolver()
 
         return instance.__enter__()
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        # Resolve the service instance when the lazy reference is used in a context manager.
+        """
+        Resolve the service instance when the lazy reference is used in a context manager.
+        """
         instance = self._resolver()
 
         return instance.__exit__(exc_type, exc_val, exc_tb)
+
+    async def __aenter__(self):
+        """
+        Resolve the service instance when the lazy reference is used in an async context manager.
+        """
+        instance = self._resolver()
+
+        return await instance.__aenter__()
+
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        """
+        Resolve the service instance when the lazy reference is used in an async context manager.
+        """
+        instance = self._resolver()
+
+        return await instance.__aexit__(exc_type, exc_val, exc_tb)
 
 
 class InstanceManager:
